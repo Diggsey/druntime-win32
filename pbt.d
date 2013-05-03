@@ -8,9 +8,10 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.pbt;
+module core.sys.windows.pbt;
+nothrow:
 
-private import win32.windef;
+private import core.sys.windows.windef;
 
 enum : WPARAM {
 	PBT_APMQUERYSUSPEND,

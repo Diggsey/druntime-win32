@@ -7,10 +7,11 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.ras;
+module core.sys.windows.ras;
+nothrow:
 pragma(lib, "rasapi32");
 
-private import win32.basetyps, win32.lmcons, win32.w32api, win32.windef;
+private import core.sys.windows.basetyps, core.sys.windows.lmcons, core.sys.windows.w32api, core.sys.windows.windef;
 
 align(4):
 

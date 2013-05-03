@@ -8,13 +8,14 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.winsvc;
+module core.sys.windows.winsvc;
+nothrow:
 pragma(lib, "advapi32");
 
-private import win32.w32api, win32.windef;
+private import core.sys.windows.w32api, core.sys.windows.windef;
 
 static assert (_WIN32_WINNT_ONLY,
-	"win32.winsvc is available only if version WindowsNTonly, WindowsXP, "
+	"core.sys.windows.winsvc is available only if version WindowsNTonly, WindowsXP, "
 	"Windows2003 or WindowsVista is set");
 
 

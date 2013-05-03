@@ -6,7 +6,8 @@
 *                 Translated from MinGW Windows headers                 *
 *                             by Daniel Keep                            *
 \***********************************************************************/
-module win32.winsock2;
+module core.sys.windows.winsock2;
+nothrow:
 pragma(lib, "Ws2_32");
 
 /*
@@ -28,15 +29,15 @@ pragma(lib, "Ws2_32");
  *	-version=Win32_Winsock1 must be set to use winsock.
  */
 version(Win32_Winsock1) {
-	pragma(msg, "Cannot use win32.winsock2 with Win32_Winsock1 defined.");
+	pragma(msg, "Cannot use core.sys.windows.winsock2 with Win32_Winsock1 defined.");
 	static assert(false);
 }
 
-import win32.winbase;
-import win32.windef;
-import win32.basetyps;
+import core.sys.windows.winbase;
+import core.sys.windows.windef;
+import core.sys.windows.basetyps;
 
-alias char u_char;
+alias ubyte u_char;
 alias ushort u_short;
 alias uint u_int, u_long, SOCKET;
 
@@ -51,29 +52,32 @@ enum : int {
 
 /* Good grief this is stupid... is it a struct?  A preprocessor macro?  A
    struct tag?  Who the hell knows!? */
-struct FD_SET {
+struct FD_SET_CUSTOM(uint SETSIZE) {
 	u_int               fd_count;
-	SOCKET[FD_SETSIZE]  fd_array;
+	SOCKET[SETSIZE]  fd_array;
 
 	/* this differs from the define in winsock.h and in cygwin sys/types.h */
-	static void opCall(SOCKET fd, FD_SET set) {
+	static void opCall(SOCKET fd, FD_SET_CUSTOM!(SETSIZE)* set) {
 		u_int i;
 		for (i = 0; i < set.fd_count; i++)
 			if (set.fd_array[i] == fd)
 				break;
 		if (i == set.fd_count)
-			if (set.fd_count < FD_SETSIZE) {
+			if (set.fd_count < SETSIZE) {
 				set.fd_array[i] = fd;
 				set.fd_count++;
 			}
 	}
 }
+alias FD_SET_CUSTOM fd_set_custom;
+
+alias FD_SET_CUSTOM!FD_SETSIZE FD_SET;
 alias FD_SET* PFD_SET, LPFD_SET;
 
 // Keep this alias, since fd_set isn't a tag name in the original header.
 alias FD_SET fd_set;
 
-extern(Windows) int __WSAFDIsSet(SOCKET, FD_SET*);
+extern(Windows) int __WSAFDIsSet(SOCKET, CPtr!(FD_SET));
 alias __WSAFDIsSet FD_ISSET;
 
 void FD_CLR(SOCKET fd, FD_SET* set) {
@@ -93,6 +97,17 @@ void FD_ZERO(FD_SET* set) {
 	set.fd_count = 0;
 }
 
+/// Creates a new $(D fd_set) with the specified capacity.
+FD_SET* FD_CREATE(uint capacity)
+{
+    // Take into account alignment (SOCKET may be 64-bit and require 64-bit alignment on 64-bit systems)
+    size_t size = (FD_SET_CUSTOM!1).sizeof - SOCKET.sizeof + (SOCKET.sizeof * capacity);
+    auto data = new ubyte[size];
+    auto set = cast(FD_SET*)data.ptr;
+    FD_ZERO(set);
+    return set;
+}
+
 
 struct TIMEVAL {
 	int tv_sec;
@@ -107,6 +122,7 @@ struct TIMEVAL {
 	}
 }
 alias TIMEVAL* PTIMEVAL, LPTIMEVAL;
+alias TIMEVAL timeval;
 
 bool timerisset(TIMEVAL* tvp) {
 	return tvp.tv_sec || tvp.tv_usec;
@@ -148,12 +164,14 @@ struct HOSTENT {
 	char* h_addr(char* h) { return h_addr_list[0] = h; }
 }
 alias HOSTENT* PHOSTENT, LPHOSTENT;
+alias HOSTENT hostent;
 
 struct LINGER {
 	u_short l_onoff;
 	u_short l_linger;
 }
 alias LINGER* PLINGER, LPLINGER;
+alias LINGER linger;
 
 enum : DWORD {
 	IOCPARAM_MASK = 0x7f,
@@ -203,6 +221,7 @@ struct SERVENT {
 	char*  s_proto;
 }
 alias SERVENT* PSERVENT, LPSERVENT;
+alias SERVENT servent;
 
 struct PROTOENT {
 	char*  p_name;
@@ -210,6 +229,7 @@ struct PROTOENT {
 	short  p_proto;
 }
 alias PROTOENT* PPROTOENT, LPPROTOENT;
+alias PROTOENT protoent;
 
 enum : int {
 	IPPROTO_IP   =   0,
@@ -281,6 +301,7 @@ struct IN_ADDR {
 	}
 }
 alias IN_ADDR* PIN_ADDR, LPIN_ADDR;
+alias IN_ADDR in_addr;
 
 // IN_CLASSx are not used anywhere or documented on MSDN.
 bool IN_CLASSA(int i) { return (i & 0x80000000) == 0; }
@@ -316,6 +337,7 @@ struct SOCKADDR_IN {
 	char[8] sin_zero;
 }
 alias SOCKADDR_IN* PSOCKADDR_IN, LPSOCKADDR_IN;
+alias SOCKADDR_IN sockaddr_in;
 
 const size_t
 	WSADESCRIPTION_LEN = 256,
@@ -413,6 +435,7 @@ struct SOCKADDR {
 	char[14] sa_data;
 }
 alias SOCKADDR* PSOCKADDR, LPSOCKADDR;
+alias SOCKADDR sockaddr;
 
 /* Portable IPv6/IPv4 version of sockaddr.
    Uses padding to force 8 byte alignment
@@ -774,8 +797,8 @@ alias LPHANDLE LPWSAEVENT;
 alias OVERLAPPED WSAOVERLAPPED;
 alias OVERLAPPED* LPWSAOVERLAPPED;
 
-private import win32.winerror;
-private import win32.winbase;
+private import core.sys.windows.winerror;
+private import core.sys.windows.winbase;
 
 enum {
 	WSA_IO_PENDING        = ERROR_IO_PENDING,
@@ -908,7 +931,7 @@ struct WSAVERSION
 alias WSAVERSION* PWSAVERSION, LPWSAVERSION;
 
 // Import for SOCKET_ADDRESS, CSADDR_INFO
-// import win32.nspapi;
+// import core.sys.windows.nspapi;
 //#ifndef __CSADDR_T_DEFINED /* also in nspapi.h */
 //#define __CSADDR_T_DEFINED
 
@@ -1461,4 +1484,14 @@ version(Unicode) {
 	alias WSASocketA WSASocket;
 	alias WSAStringToAddressA WSAStringToAddress;
 	alias WSASetServiceA WSASetService;
+}
+
+const int SIO_KEEPALIVE_VALS = IOC_IN | IOC_VENDOR | 4;
+
+/* Argument structure for SIO_KEEPALIVE_VALS */
+struct tcp_keepalive
+{
+    u_long onoff;
+    u_long keepalivetime;
+    u_long keepaliveinterval;
 }

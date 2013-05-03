@@ -7,9 +7,10 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.objfwd;
+module core.sys.windows.objfwd;
+nothrow:
 
-private import win32.objidl;
+private import core.sys.windows.objidl;
 
 /+
 // Forward declararions are not necessary in D.

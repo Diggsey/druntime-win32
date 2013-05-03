@@ -8,7 +8,8 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.w32api;
+module core.sys.windows.w32api;
+nothrow:
 
 const __W32API_VERSION = 3.12;
 const __W32API_MAJOR_VERSION = 3;

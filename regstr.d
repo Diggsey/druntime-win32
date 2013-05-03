@@ -7,11 +7,12 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.regstr;
+module core.sys.windows.regstr;
+nothrow:
 
 // TODO: fix possible conflict with shloj. Sort out NEC_98 issue.
 
-private import win32.windef;
+private import core.sys.windows.windef;
 
 const REGSTR_MAX_VALUE_LENGTH = 256;
 

@@ -8,13 +8,14 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.aclapi;
+module core.sys.windows.aclapi;
+nothrow:
 pragma(lib, "advapi32");
 
-import win32.windows, win32.accctrl;
+import core.sys.windows.windows, core.sys.windows.accctrl;
 
 static assert (_WIN32_WINNT_ONLY,
-	"win32.aclapi is available only if version WindowsNTonly, WindowsXP, "
+	"core.sys.windows.aclapi is available only if version WindowsNTonly, WindowsXP, "
 	"Windows2003 or WindowsVista is set");
 
 extern (Windows) {

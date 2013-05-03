@@ -8,13 +8,14 @@
 *                       Placed into public domain                       *
 \***********************************************************************/
 
-module win32.ws2tcpip;
+module core.sys.windows.ws2tcpip;
+nothrow:
 
-import win32.w32api;
-//import win32.winbase;
-import win32.windef;
-//import win32.basetyps;
-import win32.winsock2;
+import core.sys.windows.w32api;
+//import core.sys.windows.winbase;
+import core.sys.windows.windef;
+//import core.sys.windows.basetyps;
+import core.sys.windows.winsock2;
 
 enum {
 	IP_OPTIONS					= 1,
@@ -36,15 +37,36 @@ enum {
 }	
 
 enum {
-	IPV6_UNICAST_HOPS		= 4,
-	IPV6_MULTICAST_IF		= 9,
-	IPV6_MULTICAST_HOPS		= 10,
-	IPV6_MULTICAST_LOOP		= 11,
-	IPV6_ADD_MEMBERSHIP		= 12,
-	IPV6_DROP_MEMBERSHIP	= 13,
-	IPV6_JOIN_GROUP			= IPV6_ADD_MEMBERSHIP,
-	IPV6_LEAVE_GROUP		= IPV6_DROP_MEMBERSHIP,
-	IPV6_PKTINFO			= 19
+	IPV6_HOPOPTS = 1, // Set/get IPv6 hop-by-hop options.
+	IPV6_HDRINCL = 2, // Header is included with data.
+	IPV6_UNICAST_HOPS = 4, // IP unicast hop limit.
+	IPV6_MULTICAST_IF = 9, // IP multicast interface.
+	IPV6_MULTICAST_HOPS = 10, // IP multicast hop limit.
+	IPV6_MULTICAST_LOOP = 11, // IP multicast loopback.
+	IPV6_ADD_MEMBERSHIP = 12, // Add an IP group membership.
+	IPV6_JOIN_GROUP = IPV6_ADD_MEMBERSHIP,
+	IPV6_DROP_MEMBERSHIP = 13, // Drop an IP group membership.
+	IPV6_LEAVE_GROUP = IPV6_DROP_MEMBERSHIP,
+	IPV6_DONTFRAG = 14, // Don't fragment IP datagrams.
+	IPV6_PKTINFO = 19, // Receive packet information.
+	IPV6_HOPLIMIT = 21, // Receive packet hop limit.
+	IPV6_PROTECTION_LEVEL = 23, // Set/get IPv6 protection level.
+	IPV6_RECVIF = 24, // Receive arrival interface.
+	IPV6_RECVDSTADDR = 25, // Receive destination address.
+	IPV6_CHECKSUM = 26, // Offset to checksum for raw IP socket send.
+	IPV6_V6ONLY = 27, // Treat wildcard bind as AF_INET6-only.
+	IPV6_IFLIST = 28, // Enable/Disable an interface list.
+	IPV6_ADD_IFLIST = 29, // Add an interface list entry.
+	IPV6_DEL_IFLIST = 30, // Delete an interface list entry.
+	IPV6_UNICAST_IF = 31, // IP unicast interface.
+	IPV6_RTHDR = 32, // Set/get IPv6 routing header.
+	IPV6_RECVRTHDR = 38, // Receive the routing header.
+	IPV6_TCLASS = 39, // Packet traffic class.
+	IPV6_RECVTCLASS = 40, // Receive packet traffic class.
+	IPV6_ECN = 50, // Receive ECN codepoints in the IP header.
+	IPV6_PKTINFO_EX = 51, // Receive extended packet information.
+	IPV6_WFP_REDIRECT_RECORDS = 60, // WFP's Connection Redirect Records
+	IPV6_WFP_REDIRECT_CONTEXT = 70, // WFP's Connection Redirect Context
 }
 
 const IP_DEFAULT_MULTICAST_TTL = 1;
@@ -127,6 +149,7 @@ struct IN6_ADDR {
 	}
 }
 alias IN6_ADDR* PIN6_ADDR, LPIN6_ADDR;
+alias IN6_ADDR in6_addr;
 
 struct SOCKADDR_IN6 {
 	short sin6_family;
@@ -136,6 +159,7 @@ struct SOCKADDR_IN6 {
 	u_long sin6_scope_id;
 };
 alias SOCKADDR_IN6* PSOCKADDR_IN6, LPSOCKADDR_IN6;
+alias SOCKADDR_IN6 sockaddr_in6;
 
 extern IN6_ADDR in6addr_any;
 extern IN6_ADDR in6addr_loopback;
@@ -261,12 +285,12 @@ gai_strerrorW(int ecode)
 +/
 
 extern(Windows) {
-	INT getnameinfo(SOCKADDR* pSockaddr, socklen_t SockaddrLength,
+	INT getnameinfo(CPtr!(SOCKADDR) pSockaddr, socklen_t SockaddrLength,
 		PCHAR pNodeBuffer, DWORD NodeBufferSize, PCHAR pServiceBuffer,
 		DWORD ServiceBufferSize, INT Flags);
 
 	static if (_WIN32_WINNT >= 0x0502) {
-		INT GetNameInfoW(SOCKADDR* pSockaddr, socklen_t SockaddrLength,
+		INT GetNameInfoW(CPtr!(SOCKADDR) pSockaddr, socklen_t SockaddrLength,
 			PWCHAR pNodeBuffer, DWORD NodeBufferSize, PWCHAR pServiceBuffer,
 			DWORD ServiceBufferSize, INT Flags);
 

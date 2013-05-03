@@ -8,10 +8,11 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.dde;
+module core.sys.windows.dde;
+nothrow:
 pragma(lib, "user32");
 
-private import win32.windef;
+private import core.sys.windows.windef;
 
 enum : uint {
 	WM_DDE_FIRST     = 0x03E0,

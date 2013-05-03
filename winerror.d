@@ -7,15 +7,16 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.winerror;
+module core.sys.windows.winerror;
+nothrow:
 
 /* Comments from the Mingw header:
  * WAIT_TIMEOUT is also defined in winbase.h
  */
 
-private import win32.windef;
+private import core.sys.windows.windef;
 
-alias int SCODE; // was in win32.wtypes.
+alias int SCODE; // was in core.sys.windows.wtypes.
 
 enum : uint {
 	ERROR_SUCCESS                                         =     0,

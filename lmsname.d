@@ -7,9 +7,10 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.lmsname;
+module core.sys.windows.lmsname;
+nothrow:
 
-private import win32.windef;
+private import core.sys.windows.windef;
 
 const TCHAR[]
 	SERVICE_WORKSTATION      = "LanmanWorkstation",

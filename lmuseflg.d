@@ -7,7 +7,8 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.lmuseflg;
+module core.sys.windows.lmuseflg;
+nothrow:
 
 enum : uint {
 	USE_NOFORCE = 0,

@@ -7,14 +7,15 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.sqltypes;
+module core.sys.windows.sqltypes;
+nothrow:
 
 /* Conversion notes:
   It's assumed that ODBC >= 0x0300.
 */
 
-private import win32.windef;
-private import win32.basetyps; // for GUID
+private import core.sys.windows.windef;
+private import core.sys.windows.basetyps; // for GUID
 
 alias byte SCHAR, SQLSCHAR;
 alias int SDWORD, SLONG, SQLINTEGER;

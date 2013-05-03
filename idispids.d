@@ -8,7 +8,8 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.idispids;
+module core.sys.windows.idispids;
+nothrow:
 
 enum : int {
 	DISPID_AMBIENT_OFFLINEIFNOTCONNECTED = -5501,

@@ -8,9 +8,10 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.msacm;
+module core.sys.windows.msacm;
+nothrow:
 
-private import win32.basetsd, win32.mmsystem, win32.windef;
+private import core.sys.windows.basetsd, core.sys.windows.mmsystem, core.sys.windows.windef;
 
 alias HANDLE HACMDRIVERID, HACMDRIVER;
 alias HANDLE* LPHACMDRIVER;

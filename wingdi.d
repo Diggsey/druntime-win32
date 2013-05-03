@@ -7,12 +7,13 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.wingdi;
+module core.sys.windows.wingdi;
+nothrow:
 pragma(lib, "gdi32");
 
 // FIXME: clean up Windows version support
 
-private import win32.w32api, win32.windef, win32.winver;
+private import core.sys.windows.w32api, core.sys.windows.windef, core.sys.windows.winver;
 
 // BITMAPINFOHEADER.biCompression
 enum : DWORD {
@@ -60,7 +61,7 @@ enum {
 }
 //---
 
-/* FIXME: move to win32.winuser ? */
+/* FIXME: move to core.sys.windows.winuser ? */
 // DrawIconEx()
 enum : UINT {
 	DI_MASK        = 1,
@@ -1163,7 +1164,7 @@ enum : BYTE {
 	PC_NOCOLLAPSE = 4
 }
 
-/* FIXME: move to win32.commctrl ? */
+/* FIXME: move to core.sys.windows.commctrl ? */
 // ImageList
 const COLORREF
 	CLR_NONE    = 0xffffffff,

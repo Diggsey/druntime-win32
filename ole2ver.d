@@ -7,7 +7,8 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.ole2ver;
+module core.sys.windows.ole2ver;
+nothrow:
 
 // These are apparently not documented on the MSDN site
 const rmm = 23;

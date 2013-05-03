@@ -8,15 +8,16 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.accctrl;
+module core.sys.windows.accctrl;
+nothrow:
 
-private import win32.basetyps, win32.w32api, win32.winbase, win32.windef;
+private import core.sys.windows.basetyps, core.sys.windows.w32api, core.sys.windows.winbase, core.sys.windows.windef;
 
 // FIXME: check types and grouping of constants
 // FIXME: check Windows version support
 
 static assert (_WIN32_WINNT_ONLY,
-	"win32.accctrl is available only if version WindowsNTonly, WindowsXP, "
+	"core.sys.windows.accctrl is available only if version WindowsNTonly, WindowsXP, "
 	"Windows2003 or WindowsVista is set");
 
 alias LocalFree AccFree;

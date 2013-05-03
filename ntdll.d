@@ -8,13 +8,14 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.ntdll;
+module core.sys.windows.ntdll;
+nothrow:
 
-private import win32.w32api;
+private import core.sys.windows.w32api;
 
 // http://www.matcode.com/undocwin.h.txt
 static assert (_WIN32_WINNT_ONLY,
-	"win32.ntdll is available only if version WindowsNTonly, WindowsXP, "
+	"core.sys.windows.ntdll is available only if version WindowsNTonly, WindowsXP, "
 	"Windows2003 or WindowsVista is set");
 
 

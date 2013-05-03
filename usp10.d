@@ -2,8 +2,9 @@
  * http://msdn2.microsoft.com/library/ms776488 */
 
 
-module win32.usp10;
-import win32.windows;
+module core.sys.windows.usp10;
+nothrow:
+import core.sys.windows.windows;
 
 
 

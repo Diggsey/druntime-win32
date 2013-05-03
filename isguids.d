@@ -8,9 +8,10 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.isguids;
+module core.sys.windows.isguids;
+nothrow:
 
-private import win32.basetyps;
+private import core.sys.windows.basetyps;
 
 extern (C) extern const GUID
 	CLSID_InternetShortcut,

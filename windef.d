@@ -8,10 +8,11 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.windef;
+module core.sys.windows.windef;
 
-public import win32.winnt;
-private import win32.w32api;
+public import core.sys.windows.winnt;
+private import core.sys.windows.w32api;
+nothrow:
 
 const size_t MAX_PATH = 260;
 
@@ -50,7 +51,7 @@ ubyte LOBYTE(ushort w) {
 ubyte HIBYTE(ushort w) {
 	return cast(ubyte) (w >>> 8);
 }
-
+/*
 template max(T) {
 	T max(T a, T b) {
 		return a > b ? a : b;
@@ -62,7 +63,7 @@ template min(T) {
 		return a < b ? a : b;
 	}
 }
-
+*/
 const void* NULL = null;
 alias ubyte       BYTE;
 alias ubyte*      PBYTE, LPBYTE;

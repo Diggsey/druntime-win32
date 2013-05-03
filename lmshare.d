@@ -7,10 +7,11 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.lmshare;
+module core.sys.windows.lmshare;
+nothrow:
 
-import win32.lmcons;
-private import win32.w32api, win32.windef;
+import core.sys.windows.lmcons;
+private import core.sys.windows.w32api, core.sys.windows.windef;
 
 static if (_WIN32_WINNT_ONLY) {
 	pragma(lib, "netapi");

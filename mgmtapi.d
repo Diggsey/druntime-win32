@@ -8,10 +8,11 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.mgmtapi;
+module core.sys.windows.mgmtapi;
+nothrow:
 
-import win32.snmp;
-private import win32.windef;
+import core.sys.windows.snmp;
+private import core.sys.windows.windef;
 
 enum {
 	SNMP_MGMTAPI_TIMEOUT = 40,

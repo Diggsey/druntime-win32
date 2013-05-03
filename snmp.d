@@ -8,9 +8,10 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.snmp;
+module core.sys.windows.snmp;
+nothrow:
 
-private import win32.windows;
+private import core.sys.windows.windows;
 
 // These are not documented on MSDN
 enum {

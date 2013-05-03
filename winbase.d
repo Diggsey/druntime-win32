@@ -7,7 +7,8 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.winbase;
+module core.sys.windows.winbase;
+nothrow:
 pragma(lib, "kernel32");
 
 /**
@@ -53,11 +54,11 @@ int wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int);
 
 */
 
-import win32.windef, win32.winver;
-private import win32.basetyps, win32.w32api, win32.winnt;
+import core.sys.windows.windef, core.sys.windows.winver;
+private import core.sys.windows.basetyps, core.sys.windows.w32api, core.sys.windows.winnt, core.vararg;
 
 // FIXME:
-alias void va_list;
+//alias void va_list;
 
 
 /+
@@ -1414,6 +1415,14 @@ struct TIME_ZONE_INFORMATION {
 	LONG       DaylightBias;
 }
 alias TIME_ZONE_INFORMATION* LPTIME_ZONE_INFORMATION;
+struct REG_TZI_FORMAT
+{
+    LONG Bias;
+    LONG StandardBias;
+    LONG DaylightBias;
+    SYSTEMTIME StandardDate;
+    SYSTEMTIME DaylightDate;
+}
 
 // MSDN documents this, possibly erroneously, as Win2000+.
 struct MEMORYSTATUS {
@@ -2289,6 +2298,7 @@ WINBASEAPI BOOL WINAPI SetEvent(HANDLE);
 		BOOL SwitchToThread();
 		BOOL SystemTimeToTzSpecificLocalTime(LPTIME_ZONE_INFORMATION, LPSYSTEMTIME, LPSYSTEMTIME);
 		BOOL TryEnterCriticalSection(LPCRITICAL_SECTION);
+		BOOL TzSpecificLocalTimeToSystemTime(LPTIME_ZONE_INFORMATION, LPSYSTEMTIME, LPSYSTEMTIME);
 		BOOL UnlockFileEx(HANDLE, DWORD, DWORD, DWORD, LPOVERLAPPED);
 		BOOL UpdateResourceA(HANDLE, LPCSTR, LPCSTR, WORD, PVOID, DWORD);
 		BOOL UpdateResourceW(HANDLE, LPCWSTR, LPCWSTR, WORD, PVOID, DWORD);

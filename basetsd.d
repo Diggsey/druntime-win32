@@ -8,7 +8,8 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.basetsd;
+module core.sys.windows.basetsd;
+nothrow:
 
 /*	This template is used in these modules to declare constant pointer types,
  *	in order to support both D 1.x and 2.x.
@@ -37,7 +38,7 @@ template TypeDef(T) {
 // 'forwatd template reference' to CPtr from winnt.d caused by a circular
 // import.
 
-alias TypeDef!(void*) HANDLE;
+alias TypeDef!(CPtr!(void)) HANDLE;
 
 alias HANDLE* PHANDLE, LPHANDLE;
 

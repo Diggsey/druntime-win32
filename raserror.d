@@ -7,7 +7,8 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.raserror;
+module core.sys.windows.raserror;
+nothrow:
 
 enum {
 	SUCCESS = 0,

@@ -8,19 +8,23 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.winreg;
+module core.sys.windows.winreg;
 pragma(lib, "advapi32");
 
-private import win32.w32api, win32.winbase, win32.windef;
+private import core.sys.windows.w32api, core.sys.windows.winbase, core.sys.windows.windef;
+nothrow:
 
 const HKEY
-	HKEY_CLASSES_ROOT     = cast(HKEY) 0x80000000,
-	HKEY_CURRENT_USER     = cast(HKEY) 0x80000001,
-	HKEY_LOCAL_MACHINE    = cast(HKEY) 0x80000002,
-	HKEY_USERS            = cast(HKEY) 0x80000003,
-	HKEY_PERFORMANCE_DATA = cast(HKEY) 0x80000004,
-	HKEY_CURRENT_CONFIG   = cast(HKEY) 0x80000005,
-	HKEY_DYN_DATA         = cast(HKEY) 0x80000006;
+	HKEY_CLASSES_ROOT                = cast(HKEY) 0x80000000,
+	HKEY_CURRENT_USER                = cast(HKEY) 0x80000001,
+	HKEY_LOCAL_MACHINE               = cast(HKEY) 0x80000002,
+	HKEY_USERS                       = cast(HKEY) 0x80000003,
+	HKEY_PERFORMANCE_DATA            = cast(HKEY) 0x80000004,
+	HKEY_CURRENT_CONFIG              = cast(HKEY) 0x80000005,
+	HKEY_DYN_DATA                    = cast(HKEY) 0x80000006,
+	HKEY_CURRENT_USER_LOCAL_SETTINGS = cast(HKEY) 0x80000007,
+	HKEY_PERFORMANCE_TEXT            = cast(HKEY) 0x80000050,
+	HKEY_PERFORMANCE_NLSTEXT         = cast(HKEY) 0x80000060;
 
 enum : DWORD {
 	REG_OPTION_NON_VOLATILE,

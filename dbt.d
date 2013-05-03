@@ -8,10 +8,11 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.dbt;
+module core.sys.windows.dbt;
+nothrow:
 
-import win32.w32api, win32.windef;
-import win32.basetyps; // for GUID
+import core.sys.windows.w32api, core.sys.windows.windef;
+import core.sys.windows.basetyps; // for GUID
 
 // FIXME: clean up Windows version support
 

@@ -7,7 +7,8 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.olectlid;
+module core.sys.windows.olectlid;
+nothrow:
 
-private import win32.basetyps;
+private import core.sys.windows.basetyps;
 

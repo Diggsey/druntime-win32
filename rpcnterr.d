@@ -7,9 +7,10 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.rpcnterr;
+module core.sys.windows.rpcnterr;
+nothrow:
 
-import win32.winerror;
+import core.sys.windows.winerror;
 
 enum : uint {
 	RPC_S_OK                     = ERROR_SUCCESS,

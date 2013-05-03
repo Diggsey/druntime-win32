@@ -8,7 +8,8 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.exdispid;
+module core.sys.windows.exdispid;
+nothrow:
 
 enum : int {
 	DISPID_STATUSTEXTCHANGE = 102,

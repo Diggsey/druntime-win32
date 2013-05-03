@@ -7,9 +7,10 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.tlhelp32;
+module core.sys.windows.tlhelp32;
+nothrow:
 
-private import win32.windef;
+private import core.sys.windows.windef;
 
 enum : uint {
 	HF32_DEFAULT = 1,

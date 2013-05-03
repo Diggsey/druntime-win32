@@ -7,11 +7,12 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.lmchdev;
+module core.sys.windows.lmchdev;
+nothrow:
 
 // COMMENT: This file might be deprecated.
 
-private import win32.lmcons, win32.windef;
+private import core.sys.windows.lmcons, core.sys.windows.windef;
 
 const CHARDEVQ_NO_REQUESTS  = -1;
 const CHARDEV_CLOSE         = 0;

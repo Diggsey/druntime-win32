@@ -7,10 +7,11 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.winperf;
+module core.sys.windows.winperf;
+nothrow:
 
-import win32.windef;
-import win32.winbase; // for SYSTEMTIME
+import core.sys.windows.windef;
+import core.sys.windows.winbase; // for SYSTEMTIME
 
 const PERF_DATA_VERSION=1;
 const PERF_DATA_REVISION=1;

@@ -7,14 +7,15 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.commctrl;
+module core.sys.windows.commctrl;
+nothrow:
 pragma(lib, "comctl32");
 
-private import win32.w32api, win32.windef, win32.winuser;
-private import win32.winbase; // for SYSTEMTIME
-private import win32.objfwd;  // for LPSTREAM
+private import core.sys.windows.w32api, core.sys.windows.windef, core.sys.windows.winuser;
+private import core.sys.windows.winbase; // for SYSTEMTIME
+private import core.sys.windows.objfwd;  // for LPSTREAM
 
-import win32.prsht;
+import core.sys.windows.prsht;
 
 const COMCTL32_VERSION = 6;
 
@@ -4932,12 +4933,12 @@ uint INDEXTOSTATEIMAGEMASK(uint i) { return i << 12; }
 
 template HANDLE_WM_NOTIFY(R) {
 	R HANDLE_WM_NOTIFY(HWND hwnd, WPARAM wParam, LPARAM lParam,
-		  R function(HWND, int, NMHDR*) fn) {
+		  R function(HWND, int, NMHDR*) nothrow fn) {
 		return fn(hwnd, wParam, cast(NMHDR*) lParam);
 	}
 }
 int FORWARD_WM_NOTIFY(HWND hwnd, int idFrom, NMHDR* pnmhdr,
-	  int function(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam) fn) {
+	  int function(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam) nothrow fn) {
 	return fn(hwnd, WM_NOTIFY, idFrom, cast(LPARAM) pnmhdr);
 }
 

@@ -7,7 +7,8 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.cderr;
+module core.sys.windows.cderr;
+nothrow:
 
 enum {
 	CDERR_DIALOGFAILURE    = 0xFFFF,

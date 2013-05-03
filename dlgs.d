@@ -8,9 +8,10 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.dlgs;
+module core.sys.windows.dlgs;
+nothrow:
 
-private import win32.windef;
+private import core.sys.windows.windef;
 
 enum : ushort {
 	FILEOPENORD      = 1536,

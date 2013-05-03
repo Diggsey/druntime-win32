@@ -7,7 +7,8 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.cguid;
+module core.sys.windows.cguid;
+nothrow:
 
-private import win32.basetyps;
+private import core.sys.windows.basetyps;
 

@@ -7,10 +7,11 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.lmrepl;
+module core.sys.windows.lmrepl;
+nothrow:
 pragma(lib, "netapi32");
 
-private import win32.lmcons, win32.windef;
+private import core.sys.windows.lmcons, core.sys.windows.windef;
 
 const REPL_ROLE_EXPORT=1;
 const REPL_ROLE_IMPORT=2;

@@ -8,9 +8,10 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.mcx;
+module core.sys.windows.mcx;
+nothrow:
 
-private import win32.windef;
+private import core.sys.windows.windef;
 
 const DWORD
 	DIALOPTION_BILLING  =  64,

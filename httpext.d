@@ -7,7 +7,8 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.httpext;
+module core.sys.windows.httpext;
+nothrow:
 
 /* Comment from MinGW
        httpext.h - Header for ISAPI extensions.
@@ -19,7 +20,7 @@ module win32.httpext;
        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
-private import win32.windows;
+private import core.sys.windows.windows;
 
 enum {
     HSE_VERSION_MAJOR               = 2,

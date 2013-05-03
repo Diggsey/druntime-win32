@@ -8,11 +8,12 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.powrprof;
+module core.sys.windows.powrprof;
+nothrow:
 pragma(lib, "powrprof");
 
-private import win32.windef;
-private import win32.ntdef;
+private import core.sys.windows.windef;
+private import core.sys.windows.ntdef;
 
 // FIXME: look up Windows version support
 

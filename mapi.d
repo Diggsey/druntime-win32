@@ -8,9 +8,10 @@
 *                                                                       *
 *                       Placed into public domain                       *
 \***********************************************************************/
-module win32.mapi;
+module core.sys.windows.mapi;
+nothrow:
 
-private import win32.windef;
+private import core.sys.windows.windef;
 
 // FIXME: check types and grouping of constants
 
